@@ -19,7 +19,12 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  
+  '/' : "BasketController.getAllBasketListView",
+  '/getAllBasketList' : "BasketController.getAllBasketList",
+  '/update' : 'BasketController.updateBasketView',
+
+  'post /update' : 'BasketController.updateBasketDetails'
 
 
   /***************************************************************************

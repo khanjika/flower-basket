@@ -20,6 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  '/getAllBasketListView' : "BasketController.getAllBasketListView"
 
 
   /***************************************************************************

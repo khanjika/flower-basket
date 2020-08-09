@@ -9,23 +9,20 @@ const dbPool = mysql.createPool({
 	port: '3306'
 });
 
-module.exports = {
-	getAllBasketListView: (req, res) => {
 
-		console.log('Received request to getAllBasketListView');
+exports.lambdaHandler = (event, context) => {
+  console.log('Received request to getAllBasketListView');
 		dbPool.getConnection(function(err, basketDb) {
 			if (err) {
 				console.log('Failed to connect to mysql ' + err);
-				//context.succeed({ statusCode: 500, message: 'Failed to connect to database' });
-				res.send(err);
+				context.succeed({ statusCode: 500, message: 'Failed to connect to database' });
 				return;
 			}
 			basketDb.query('select * from baskets', (findErr, findResult) => {
 				basketDb.release();
 				if (findErr) {
 					console.log('Error in fetching database ' + findErr);
-					//context.succeed({ statusCode: 500, message: findErr });
-					res.send(findErr);
+					context.succeed({ statusCode: 500, message: findErr });
 					return;
 				}
 
@@ -35,22 +32,7 @@ module.exports = {
 					message: 'Successfull',
 					body: findResult
 				};
-				res.send(response);
-				//context.succeed(response);
+				context.succeed(response);
 			});
 		});
-
-
-
-	},
-
-	getAllBasketList: (req, res) => {},
-
-	addNewBasket: (req, res) => {},
-
-	updateBasketDetails: (req, res) => {},
-
-	deleteBasketDetails: (req, res) => {},
-
-	saveOrderDetails: (req, res) => {}
 };

@@ -6,11 +6,11 @@
  */
 
 module.exports = {
-	login: (req, res) => {},
+  login: (req, res) => {},
 
-	placeOrder: (req, res) => {},
+  placeOrder: (req, res) => {},
 
-	showFlowerBasketCombos: (req, res) => {},
+  showFlowerBasketCombos: (req, res) => {},
 
-	userOrderHistory: (req, res) => {}
+  userOrderHistory: (req, res) => {}
 };

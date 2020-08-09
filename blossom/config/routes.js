@@ -20,7 +20,9 @@ module.exports.routes = {
 
 	'/': 'FlowerController.getAllFlowerListView',
 	'get /update': 'FlowerController.updateFlowerView',
-	'post /update': 'FlowerController.updateFlowerDetails'
+	'post /update': 'FlowerController.updateFlowerDetails',
+
+	'get /create': { view: 'pages/createNew' }
 
 	/***************************************************************************
   *                                                                          *

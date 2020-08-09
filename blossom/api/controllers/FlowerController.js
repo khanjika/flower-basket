@@ -115,7 +115,45 @@ module.exports = {
 		);
 	},
 
-	updateFlowerDetails: (req, res) => {},
+	updateFlowerDetails: (req, res) => {
+		console.log('Received request to update flower details with body ' + req.body);
+		let details = req.body.details;
+		let price = req.body.price;
+		let quantityAvailable = req.body.quantityAvailable;
+		let flowerId = req.body.flowerId;
+
+		let reqBody = {
+			details: details,
+			price: price,
+			quantityAvailable: quantityAvailable,
+			flowerId: flowerId
+		};
+		request(
+			{
+				url: 'https://164r7x3ank.execute-api.us-east-1.amazonaws.com/prod/updateflowerdetails',
+				method: 'POST',
+				body: JSON.stringify(reqBody)
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured while updating due to: ' + error);
+					return res.view('pages/errorPage', {
+						message: 'Error in updating flower details'
+					});
+				}
+				let responseBody = JSON.parse(response.body);
+				//let status = result.statusCode;
+				console.log(responseBody);
+				if (responseBody.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: responseBody.message
+					});
+				} else {
+					res.redirect('/');
+				}
+			}
+		);
+	},
 
 	deleteFlowerDetails: (req, res) => {},
 

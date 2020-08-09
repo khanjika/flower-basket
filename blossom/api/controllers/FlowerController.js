@@ -37,7 +37,23 @@ module.exports = {
 		);
 	},
 
-	getAllFlowerList: (req, res) => {},
+	getAllFlowerList: (req, res) => {
+		request(
+			{
+				url: 'https://bjcuqdukt5.execute-api.us-east-1.amazonaws.com/prod/getallflowerlist',
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					res.send(500, 'Error in getting job details!!');
+				}
+				let result = JSON.parse(response.body);
+				//let status = result.statusCode;
+				console.log(result);
+				return res.json(result);
+			}
+		);
+	},
 
 	addNewFlower: (req, res) => {
 		console.log('Received request to addNewFlower');
@@ -64,6 +80,39 @@ module.exports = {
 				context.succeed(response);
 			});
 		});
+	},
+
+	updateFlowerView: (req, res) => {
+		console.log('Received request to updateFlowerView');
+		let flowerId = req.param('flowerId');
+
+		request(
+			{
+				url: 'https://k03ohlrka4.execute-api.us-east-1.amazonaws.com/prod/getflowerdetail?flowerId=' + flowerId,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					res.send(500, 'Error in getting job details!!');
+				}
+				let responseBody = JSON.parse(response.body);
+				//let status = result.statusCode;
+				console.log(responseBody);
+				if (responseBody.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: responseBody.message
+					});
+				} else {
+					if (responseBody.result.length > 0) {
+						res.view('pages/updatepage', { flower: responseBody.result[0] });
+					} else {
+						return res.view('pages/errorPage', {
+							message: 'Error in finding details of flower'
+						});
+					}
+				}
+			}
+		);
 	},
 
 	updateFlowerDetails: (req, res) => {},

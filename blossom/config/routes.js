@@ -18,7 +18,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-	'/': 'FlowerController.getAllFlowerListView'
+	'/': 'FlowerController.getAllFlowerListView',
+	'get /update': 'FlowerController.updateFlowerView',
+	'post /update': 'FlowerController.updateFlowerDetails'
 
 	/***************************************************************************
   *                                                                          *

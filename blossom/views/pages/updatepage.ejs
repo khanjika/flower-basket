@@ -1,0 +1,32 @@
+<div class="container m-5" style="width: 60%;">
+    <body>
+      <h1>Update flower details</h1>
+      <form action="/update" method="POST">
+        <input type="hidden" name="flowerId" value='<%= flower.flowerId %>' />
+        <div class="form-group">
+          <label>Flower Name</label>
+          <input type="text" class="form-control" name="flowerName" value='<%= flower.flowerName %>' disabled />
+        </div>
+  
+        <div class="form-group">
+          <label>Flower description</label>
+        </br>
+        <input type="text" class="form-control" name="details" value='<%= flower.details %>' required />
+        </div>
+  
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" class="form-control" name="quantityAvailable" value='<%= flower.quantityAvailable %>' required />
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" name="price" value='<%= flower.price %>' required />
+          </div>
+  
+        <button button class="btn btn-primary">Update</button>
+      </form>
+      <br />
+      <form action="/"><button class="btn btn-success">Home</button></form>
+    </body>
+  </div>
+  

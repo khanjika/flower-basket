@@ -9,8 +9,7 @@
  */
 
 module.exports.routes = {
-
-  /***************************************************************************
+	/***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` your home page.            *
   *                                                                          *
@@ -19,10 +18,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+	'/': { view: 'pages/homepage' },
+	'get /login': { view: 'pages/loginpage' },
 
+	'post /login': 'FlowerBasketController.login',
+	'get /signup': 'FlowerBasketController.signUpForm',
 
-  /***************************************************************************
+	'post /signup': 'FlowerBasketController.signUp',
+	'get /placeOrder': 'FlowerBasketController.placeOrder'
+
+	/***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
   * (See https://sailsjs.com/config/routes for examples.)                    *
@@ -32,6 +37,4 @@ module.exports.routes = {
   * not match any of those, it is matched against static assets.             *
   *                                                                          *
   ***************************************************************************/
-
-
 };

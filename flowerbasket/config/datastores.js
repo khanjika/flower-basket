@@ -14,7 +14,7 @@
  */
 
 module.exports.datastores = {
-	/***************************************************************************
+  /***************************************************************************
   *                                                                          *
   * Your app's default datastore.                                            *
   *                                                                          *
@@ -30,12 +30,12 @@ module.exports.datastores = {
   *                                                                          *
   ***************************************************************************/
 
-	default: {
-		adapter: 'sails-mysql',
-		host: 'cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com',
-		user: 'admin',
-		password: 'aws_data',
-		database: 'flowerBasket',
-		port: '3306'
-	}
+  default: {
+    adapter: 'sails-mysql',
+    host: 'cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com',
+    user: 'admin',
+    password: 'aws_data',
+    database: 'flowerBasket',
+    port: '3306'
+  }
 };

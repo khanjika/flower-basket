@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <h2>Flower Basket Combos</h2>
+  <table class="table">
+    <thread>
+      <tr>
+        <th>Combo Id</th>
+        <th>Flower Name</th>
+        <th>Basket Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thread>
+    <tbody>
+      <% combos.forEach(function(i){ %>
+      <tr>
+        <td>
+          <%= i.id %>
+        </td>
+        <td>
+          <%= i.flowerName %>
+        </td>
+        <td>
+          <%= i.basketName %>
+        </td>
+        <td>
+          <%= i.price %>
+        </td>
+        <td>
+          <a href="/combo/detail?id=<%=i.id%>">View Details</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

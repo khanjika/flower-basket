@@ -1,5 +1,6 @@
 const AmazonCognitoIdentityJs = require("amazon-cognito-identity-js");
 global.fetch = require("node-fetch");
+const request = require("request");
 
 const poolData = {
   UserPoolId: "us-east-1_7oXrtUrE1",
@@ -74,10 +75,6 @@ module.exports = {
     return res.send(req.session.username);
   },
 
-  showFlowerBasketCombos: (req, res) => {},
-
-  userOrderHistory: (req, res) => {},
-
   viewCombos: (req, res) => {
     console.log("here you go....");
     FlowerBasket.find({}).exec(function (err, result) {
@@ -91,6 +88,7 @@ module.exports = {
       res.view("pages/homepage", { combos: result });
     });
   },
+
   viewComboDetails: (req, res) => {
     let id = req.param("id");
     FlowerBasket.find({ id: id }).exec(function (err, result) {
@@ -105,5 +103,14 @@ module.exports = {
     });
   },
 
-  userOrderHistory: (req, res) => {},
+  customizeCombo: (req, res) => {
+    request.get({ url: "" }, function (error, response, body) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(response.body);
+      }
+    });
+    res.view("pages/customizecombo");
+  },
 };

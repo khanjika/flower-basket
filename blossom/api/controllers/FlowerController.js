@@ -219,5 +219,38 @@ module.exports = {
     );
   },
 
+  addFlowerDetails: (req, res) => {
+    console.log("hii");
+    reqBodyName = {
+      "flowerName": req.body.flowerName,
+      "details": req.body.details,
+      "price": req.body.price,
+      "imageUrl": req.body.imageUrl,
+      "quantityAvailable": req.body.quantityAvailable
+    }
+    request(
+      {
+        url:
+          "https://nie5qkba36.execute-api.us-east-1.amazonaws.com/prod/addflowerdetails",
+        method: "POST",
+        body: JSON.stringify(reqBodyName),
+      },
+      function (error, response, body) {
+        if (error) {
+          res.send(500, "Error in adding flower details!!");
+        }
+        let responseBody = JSON.parse(response.body);
+        if (responseBody.statusCode != 200) {
+          return res.view("pages/errorPage", {
+            message: responseBody.message,
+          });
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
+  },
+
+
   saveOrderDetails: (req, res) => { },
 };

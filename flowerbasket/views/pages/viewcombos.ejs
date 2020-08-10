@@ -1,7 +1,29 @@
+<div class="homepage">
+  <nav class="navbar navbar-dark navbar-expand-md darkNav pt-2 pb-2 pl-4 pr-4">
+    <a class="navbar-brand" href="/">BuyBest</a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+    <ul class="navbar-nav mr-right">
+      <li class="nav-item">
+        <a href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a href="/signup">Signup</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
 <div class="container mt-5">
-  <h2>Flower Basket Combos</h2>
-  <table class="table">
-    <thread>
+  <div style="margin-top: 80px; text-align: center;">
+    <h2>Flower Basket Combos</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
       <tr>
         <th>Combo Id</th>
         <th>Flower Name</th>
@@ -9,7 +31,7 @@
         <th>Price</th>
         <th></th>
       </tr>
-    </thread>
+    </thead>
     <tbody>
       <% combos.forEach(function(i){ %>
       <tr>

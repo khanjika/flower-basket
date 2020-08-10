@@ -45,7 +45,7 @@ module.exports = {
     },
     flowerQuantity: {
       columnName: "flowerQuantity",
-      type: "int",
+      type: "Number",
       columnType: "int",
     },
   },

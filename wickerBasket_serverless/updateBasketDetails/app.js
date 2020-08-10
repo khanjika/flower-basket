@@ -27,6 +27,16 @@ exports.lambdaHandler = (event, context) => {
 	  return;
 	}
 	console.log(event);
+
+	if (quantityAvailable < 0 || price < 0) {
+		let response = {
+		  statusCode: 400,
+		  message: "Negative values not allowed",
+		};
+		context.succeed(response);
+		return;
+	  }
+	  
 	basketDb.query(
 	  "select * from baskets where basketId = ?",
 	  [basketId],

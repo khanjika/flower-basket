@@ -1,8 +1,15 @@
 <nav class="navbar navbar-dark navbar-expand-md darkNav pt-2 pb-2 pl-5 pr-5">
   <a class="navbar-brand" href="/">FlowerBasket</a>
   <form class="form-inline ml-auto">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <input
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Search
+    </button>
   </form>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
@@ -16,6 +23,43 @@
     </li>
   </ul>
 </nav>
-<div style="padding-top: 70px;">
-  <a href="/viewcombos">View Combos</a>
+<div class="container mt-5 pt-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Combo Id</th>
+        <th>Flower Name</th>
+        <th>Basket Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% combos.forEach(function(i){ %>
+      <tr>
+        <td>
+          <%= i.id %>
+        </td>
+        <td>
+          <%= i.flowerName %>
+        </td>
+        <td>
+          <%= i.basketName %>
+        </td>
+        <td>
+          <%= i.price %>
+        </td>
+        <td>
+          <a
+            href="/combo/detail?id=<%=i.id%>"
+            type="button"
+            class="btn btn-dark"
+            role="btn btn-info"
+            >View Details</a
+          >
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>

@@ -23,6 +23,7 @@ module.exports.routes = {
   '/' : "BasketController.getAllBasketListView",
   '/getAllBasketList' : "BasketController.getAllBasketList",
   '/update' : 'BasketController.updateBasketView',
+  '/delete' : 'BasketController.deleteBasketDetails',
 
   'post /update' : 'BasketController.updateBasketDetails'
 

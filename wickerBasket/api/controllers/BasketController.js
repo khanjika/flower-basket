@@ -211,7 +211,28 @@ module.exports = {
 
 	},
 
-	deleteBasketDetails: (req, res) => {},
+	deleteBasketDetails: (req, res) => {
+		console.log('Received request to delete Basket');
+
+		let basketId = req.param('basketId');		
+				
+		request(
+			{
+				url: 'https://0ws3jahlt7.execute-api.us-east-1.amazonaws.com/prod/deletebasketdetails?basketId=' +req.param('basketId'),
+				method: "GET"
+			},
+			async function(error, response, body) {
+				if (error) {
+					console.log(error);
+					return res.error('Failed to delete basket. Try again!');
+				}
+				console.log(response.body);				
+		
+				return res.redirect("/");
+			}
+		);
+
+	},
 
 	saveOrderDetails: (req, res) => {}
 };

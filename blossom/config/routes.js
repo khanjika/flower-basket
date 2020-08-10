@@ -22,6 +22,7 @@ module.exports.routes = {
   "get /update": "FlowerController.updateFlowerView",
   "post /update": "FlowerController.updateFlowerDetails",
   "post /search": "FlowerController.searchByName",
+  "get /delete": "FlowerController.deleteFlowerDetails",
 
   "get /create": { view: "pages/createNew" },
 

@@ -193,7 +193,31 @@ module.exports = {
     );
   },
 
-  deleteFlowerDetails: (req, res) => { },
+  deleteFlowerDetails: (req, res) => {
+    console.log(req.param("flowerId"));
+    let flowerId = req.param("flowerId");
+    request(
+      {
+        url:
+          "https://ql6xwq41y2.execute-api.us-east-1.amazonaws.com/prod/deleteflowerbyid?flowerId=" +
+          flowerId,
+        method: "GET",
+      },
+      function (error, response, body) {
+        if (error) {
+          res.send(500, "Error in deleting flower details!!");
+        }
+        let responseBody = JSON.parse(response.body);
+        if (responseBody.statusCode != 200) {
+          return res.view("pages/errorPage", {
+            message: responseBody.message,
+          });
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
+  },
 
   saveOrderDetails: (req, res) => { },
 };

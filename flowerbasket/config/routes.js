@@ -18,9 +18,15 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  "/": { view: "pages/homepage" },
-  "GET /viewcombos": "FlowerBasketController.viewCombos",
+  "get /": "FlowerBasketController.viewCombos",
   "GET /combo/detail": "FlowerBasketController.viewComboDetails",
+  "get /login": { view: "pages/loginpage" },
+
+  "post /login": "FlowerBasketController.login",
+  "get /signup": "FlowerBasketController.signUpForm",
+
+  "post /signup": "FlowerBasketController.signUp",
+  "get /placeOrder": "FlowerBasketController.placeOrder",
 
   /***************************************************************************
    *                                                                          *

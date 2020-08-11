@@ -114,6 +114,21 @@ module.exports = {
     });
   },
 
+  showOrderHistory: (req, res) => {
+    let username = "admin";
+    OrderHistory.find({ username: username }).exec(function (err, result) {
+      if (err) {
+        res.send(500, { error: "Error in Database" });
+      }
+      if (result == "") {
+        res.send("No data present");
+      } else {
+        console.log(result);
+        res.view("pages/showorderhistory", { orderhistory: result });
+      }
+    });
+  },
+
   customizeCombo: (req, res) => {
     request.get({ url: "http://localhost:1338/getAllFlowerList" }, function (
       error,

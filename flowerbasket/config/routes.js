@@ -21,6 +21,7 @@ module.exports.routes = {
   "get /": "FlowerBasketController.viewCombos",
   "GET /combo/detail": "FlowerBasketController.viewComboDetails",
   "get /login": { view: "pages/loginpage" },
+  "GET /showorderhistory": "FlowerBasketController.showOrderHistory",
 
   "post /login": "FlowerBasketController.login",
   "get /signup": "FlowerBasketController.signUpForm",

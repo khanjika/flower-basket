@@ -80,6 +80,15 @@ module.exports = {
     return res.send(req.session.username);
   },
 
+  customizePlaceOrder: (req, res) => {
+    let username = req.session.username;
+
+    let flowerName = req.param("flowerName");
+    let basketName = req.param("basketName");
+    let checkQuantity = checkQuantity(flowerName, basketName);
+    return res.send(req.session.username);
+  },
+
   viewCombos: (req, res) => {
     FlowerBasket.find({}).exec(function (err, result) {
       if (err) {

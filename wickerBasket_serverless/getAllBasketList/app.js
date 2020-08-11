@@ -2,7 +2,7 @@ const mysql = require('mysql');
 
 const dbPool = mysql.createPool({
 	connectionLimit: 5,
-	host: 'cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com',
+	host: 'baskets.ccaqr39dxhsq.us-east-1.rds.amazonaws.com',
 	user: 'admin',
 	password: 'aws_data',
 	database: 'wickerBasket',

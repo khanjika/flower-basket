@@ -1,5 +1,6 @@
 const request = require('request');
 const mysql = require('mysql');
+const { checkAvailablityOfFlower } = require('../../../blossom/api/controllers/FlowerController');
 
 const dbPool = mysql.createPool({
 	connectionLimit: 5,
@@ -12,7 +13,6 @@ const dbPool = mysql.createPool({
 
 module.exports = {
 	getAllBasketListView: (req, res) => {
-
 		console.log('Received request to getAllBasketListView');
 		request.get(
 			{
@@ -28,15 +28,11 @@ module.exports = {
 				let basketList = JSON.parse(response.body);
 				let flag = true;
 				return res.view('pages/homepage', { basketList: basketList.result });
-				
 			}
 		);
-
-
 	},
 
 	getAllBasketList: (req, res) => {
-
 		request.get(
 			{
 				url: 'https://azs5932w5f.execute-api.us-east-1.amazonaws.com/prod/getallbasketlist'
@@ -53,10 +49,7 @@ module.exports = {
 				return res.status(200).json(basketList.result);
 			}
 		);
-
-
 	},
-
 
 	addNewBasket: (req, res) => {},
 
@@ -65,8 +58,10 @@ module.exports = {
 
 		request(
 			{
-				url: 'https://t9w66xc78k.execute-api.us-east-1.amazonaws.com/prod/getbasketdetails?basketId=' +req.param('basketId'),
-				method: "GET"
+				url:
+					'https://t9w66xc78k.execute-api.us-east-1.amazonaws.com/prod/getbasketdetails?basketId=' +
+					req.param('basketId'),
+				method: 'GET'
 			},
 			async function(error, response, body) {
 				if (error) {
@@ -74,7 +69,7 @@ module.exports = {
 					return res.error('Failed to get basket details. Try again');
 				}
 				console.log(response.body);
-				
+
 				// let response = {
 				// 	statusCode: 200,
 				// 	message: 'Successfull',
@@ -86,8 +81,7 @@ module.exports = {
 				return res.view('pages/updatepage', { basket: basket.result[0] });
 			}
 		);
-		
-		
+
 		// dbPool.getConnection(function(err, basketDb) {
 		// 	if (err) {
 		// 		console.log('Failed to connect to mysql ' + err);
@@ -116,27 +110,22 @@ module.exports = {
 		// 		//context.succeed(response);
 		// 	});
 		// });
-
-
-
 	},
 
 	updateBasketDetails: (req, res) => {
-
 		let bodyData = {
-			basketName : req.body.basketName,
-   			basketId : req.body.basketId,
-   			details : req.body.details,
-   			price : req.body.price,
-   			quantityAvailable : req.body.quantityAvailable
-		  };
-	  
+			basketName: req.body.basketName,
+			basketId: req.body.basketId,
+			details: req.body.details,
+			price: req.body.price,
+			quantityAvailable: req.body.quantityAvailable
+		};
+
 		request(
 			{
 				url: 'https://d3s7qty54m.execute-api.us-east-1.amazonaws.com/prod/updatebasketdetails',
-				method: "POST",
-        		body: JSON.stringify(bodyData),
-
+				method: 'POST',
+				body: JSON.stringify(bodyData)
 			},
 			async function(error, response, body) {
 				if (error) {
@@ -144,10 +133,9 @@ module.exports = {
 					return res.error('Failed to update basket details. Try again');
 				}
 				console.log(response.body);
-				res.redirect("/");
+				res.redirect('/');
 			}
 		);
-
 
 		// console.log(req.body.basketName);
 		// let basketName = req.body.basketName;
@@ -205,34 +193,54 @@ module.exports = {
 		// 	  }
 		// 	);
 		// 	res.redirect("/");
-			
-		//   });
-		
 
+		//   });
 	},
 
 	deleteBasketDetails: (req, res) => {
 		console.log('Received request to delete Basket');
 
-		let basketId = req.param('basketId');		
-				
+		let basketId = req.param('basketId');
+
 		request(
 			{
-				url: 'https://0ws3jahlt7.execute-api.us-east-1.amazonaws.com/prod/deletebasketdetails?basketId=' +req.param('basketId'),
-				method: "GET"
+				url:
+					'https://0ws3jahlt7.execute-api.us-east-1.amazonaws.com/prod/deletebasketdetails?basketId=' +
+					req.param('basketId'),
+				method: 'GET'
 			},
 			async function(error, response, body) {
 				if (error) {
 					console.log(error);
 					return res.error('Failed to delete basket. Try again!');
 				}
-				console.log(response.body);				
-		
-				return res.redirect("/");
+				console.log(response.body);
+
+				return res.redirect('/');
 			}
 		);
-
 	},
 
-	saveOrderDetails: (req, res) => {}
+	saveOrderDetails: (req, res) => {},
+
+	checkAvailablityOfBasket: (req, res) => {
+		console.log('Request received to check if basket available');
+		let basketName = req.param('basketName');
+
+		request(
+			{
+				url:
+					'https://80aam1d009.execute-api.us-east-1.amazonaws.com/prod/checkavailabilityofbasket?basketName=' +
+					basketName,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured');
+					return res.json({ result: false });
+				}
+				return res.json(JSON.parse(response.body));
+			}
+		);
+	}
 };

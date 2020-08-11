@@ -9,8 +9,7 @@
  */
 
 module.exports.routes = {
-
-  /***************************************************************************
+	/***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` your home page.            *
   *                                                                          *
@@ -19,16 +18,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  
-  '/' : "BasketController.getAllBasketListView",
-  '/getAllBasketList' : "BasketController.getAllBasketList",
-  '/update' : 'BasketController.updateBasketView',
-  '/delete' : 'BasketController.deleteBasketDetails',
+	'/': 'BasketController.getAllBasketListView',
+	'/getAllBasketList': 'BasketController.getAllBasketList',
+	'/update': 'BasketController.updateBasketView',
+	'/delete': 'BasketController.deleteBasketDetails',
 
-  'post /update' : 'BasketController.updateBasketDetails'
+	'post /update': 'BasketController.updateBasketDetails',
+	'get /checkAvailablityOfBasket': 'BasketController.checkAvailablityOfBasket'
 
-
-  /***************************************************************************
+	/***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
   * (See https://sailsjs.com/config/routes for examples.)                    *
@@ -38,6 +36,4 @@ module.exports.routes = {
   * not match any of those, it is matched against static assets.             *
   *                                                                          *
   ***************************************************************************/
-
-
 };

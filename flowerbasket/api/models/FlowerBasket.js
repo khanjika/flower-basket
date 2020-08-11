@@ -23,8 +23,8 @@ module.exports = {
       type: "string",
       required: true,
     },
-    details: {
-      columnName: "details",
+    comboName: {
+      columnName: "comboName",
       type: "string",
       columnType: "varchar",
     },

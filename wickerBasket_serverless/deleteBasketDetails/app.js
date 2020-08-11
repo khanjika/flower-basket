@@ -19,7 +19,6 @@ exports.lambdaHandler = (event, context) => {
 			if (err) {
 				console.log('Failed to connect to mysql ' + err);
 				context.succeed({ statusCode: 500, message: 'Failed to connect to mySql' });
-				// res.send(err);
 				return;
 			}
 			basketDb.query('delete from baskets where basketId = ?', [basketId], (findErr, findResult) => {
@@ -27,7 +26,6 @@ exports.lambdaHandler = (event, context) => {
 				if (findErr) {
 					console.log('Error in fetching values from database ' + findErr);
 					context.succeed({ statusCode: 500, message: 'Error in fetching values from database' });
-					//res.send(findErr);
 					return;
 				}
 
@@ -36,7 +34,6 @@ exports.lambdaHandler = (event, context) => {
 					message: 'Successfull',
 					result: findResult
 				};
-				//return res.redirect("/");
 				context.succeed(response);
 			});
 		});

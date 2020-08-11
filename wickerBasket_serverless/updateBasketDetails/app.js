@@ -13,7 +13,6 @@ const dbPool = mysql.createPool({
 exports.lambdaHandler = (event, context) => {
   console.log('Received request to getAllBasketListView');
 		
-  //console.log(req.body.basketName);
   let basketName = event["basketName"];
   let basketId = event["basketId"];
   let details = event["details"];

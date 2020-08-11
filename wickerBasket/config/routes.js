@@ -24,6 +24,8 @@ module.exports.routes = {
   '/getAllBasketList' : "BasketController.getAllBasketList",
   '/update' : 'BasketController.updateBasketView',
   '/delete' : 'BasketController.deleteBasketDetails',
+  '/addNewBasket' : 'BasketController.addNewBasket',
+  'post /add' : 'BasketController.addNewBasketToDB',
 
   'post /update' : 'BasketController.updateBasketDetails'
 

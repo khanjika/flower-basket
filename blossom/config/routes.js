@@ -9,7 +9,7 @@
  */
 
 module.exports.routes = {
-  /***************************************************************************
+	/***************************************************************************
    *                                                                          *
    * Make the view located at `views/homepage.ejs` your home page.            *
    *                                                                          *
@@ -18,16 +18,18 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  "/": "FlowerController.getAllFlowerListView",
-  "get /update": "FlowerController.updateFlowerView",
-  "post /update": "FlowerController.updateFlowerDetails",
-  "post /search": "FlowerController.searchByName",
-  "get /delete": "FlowerController.deleteFlowerDetails",
-  "post /create": "FlowerController.addFlowerDetails",
+	'/': 'FlowerController.getAllFlowerListView',
+	'get /update': 'FlowerController.updateFlowerView',
+	'post /update': 'FlowerController.updateFlowerDetails',
+	'post /search': 'FlowerController.searchByName',
+	'get /delete': 'FlowerController.deleteFlowerDetails',
+	'post /create': 'FlowerController.addFlowerDetails',
 
-  "get /create": { view: "pages/createNew" },
+	'get /checkAvailablityOfFlower': 'FlowerController.checkAvailablityOfFlower',
 
-  /***************************************************************************
+	'get /create': { view: 'pages/createNew' }
+
+	/***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
    * (See https://sailsjs.com/config/routes for examples.)                    *

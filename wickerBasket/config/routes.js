@@ -26,7 +26,9 @@ module.exports.routes = {
 	'post /add': 'BasketController.addNewBasketToDB',
 
 	'post /update': 'BasketController.updateBasketDetails',
-	'get /checkAvailablityOfBasket': 'BasketController.checkAvailablityOfBasket'
+	'get /checkAvailablityOfBasket': 'BasketController.checkAvailablityOfBasket',
+	'get /placeBasketOrder': 'BasketController.placeBasketOrder',
+	'get /completeBasketOrder': 'BasketController.completeBasketOrder'
 
 	/***************************************************************************
   *                                                                          *

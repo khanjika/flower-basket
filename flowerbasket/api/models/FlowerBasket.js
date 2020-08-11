@@ -6,48 +6,48 @@
  */
 
 module.exports = {
-  attributes: {
-    id: {
-      columnName: "flowerBaseketId",
-      type: "Number",
-      required: true,
-      columnType: "int",
-    },
-    flowerName: {
-      columnName: "flowerName",
-      type: "string",
-      required: true,
-    },
-    basketName: {
-      columnName: "basketName",
-      type: "string",
-      required: true,
-    },
-    details: {
-      columnName: "details",
-      type: "string",
-      columnType: "varchar",
-    },
-    price: {
-      columnName: "price",
-      type: "Number",
-      columnType: "int",
-    },
-    flowerImageUrl: {
-      columnName: "flowerImageUrl",
-      type: "string",
-      columnType: "varchar",
-    },
-    basketImageUrl: {
-      columnName: "basketImageUrl",
-      type: "string",
-      columnType: "varchar",
-    },
-    flowerQuantity: {
-      columnName: "flowerQuantity",
-      type: "Number",
-      columnType: "int",
-    },
-  },
-  tableName: "flowerBasket",
+	attributes: {
+		id: {
+			columnName: 'flowerBasketId',
+			type: 'Number',
+			required: true,
+			columnType: 'int'
+		},
+		flowerName: {
+			columnName: 'flowerName',
+			type: 'string',
+			required: true
+		},
+		basketName: {
+			columnName: 'basketName',
+			type: 'string',
+			required: true
+		},
+		details: {
+			columnName: 'comboName',
+			type: 'string',
+			columnType: 'varchar'
+		},
+		price: {
+			columnName: 'price',
+			type: 'Number',
+			columnType: 'int'
+		},
+		flowerImageUrl: {
+			columnName: 'flowerImageUrl',
+			type: 'string',
+			columnType: 'varchar'
+		},
+		basketImageUrl: {
+			columnName: 'basketImageUrl',
+			type: 'string',
+			columnType: 'varchar'
+		},
+		flowerQuantity: {
+			columnName: 'flowerQuantity',
+			type: 'Number',
+			columnType: 'int'
+		}
+	},
+	tableName: 'flowerBasket'
 };

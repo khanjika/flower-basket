@@ -1,6 +1,8 @@
 const AmazonCognitoIdentityJs = require('amazon-cognito-identity-js');
 global.fetch = require('node-fetch');
 const request = require('request');
+const crypto = require('crypto');
+const { setMaxListeners } = require('process');
 
 const poolData = {
 	UserPoolId: 'us-east-1_7oXrtUrE1',
@@ -67,13 +69,40 @@ module.exports = {
 		});
 	},
 
-	placeOrder: (req, res) => {
+	placeOrder: async (req, res) => {
 		let username = req.session.username;
-
 		let flowerName = req.param('flowerName');
 		let basketName = req.param('basketName');
-		let checkQuantity = checkQuantity(flowerName, basketName);
-		return res.send(req.session.username);
+
+		let quantityAvailable = await Utils.checkQuantity(flowerName, basketName);
+		console.log(quantityAvailable);
+		if (quantityAvailable == false) {
+			res.view('pages/errorpage', {
+				message: 'Flower or basket is running out of stock. Kindly select another flower basket'
+			});
+			return;
+		}
+		const orderId = crypto.randomBytes(16).toString('hex');
+		console.log(orderId);
+		let basketOrderStatus = await Utils.placeBasketOrder(basketName, orderId);
+		let flowerOrderStatus = await Utils.placeFlowerOrder(flowerName, orderId);
+		console.log(flowerOrderStatus);
+		console.log(basketOrderStatus);
+		if (flowerOrderStatus === false || basketOrderStatus === false) {
+			console.log('Reverting the transaction');
+			let revertBasketOrder = await Utils.completeBasketOrder(orderId, false);
+			let revertFlowerOrder = await Utils.completeFlowerOrder(orderId, false);
+			console.log(revertBasketOrder + ' ' + revertFlowerOrder);
+			res.view('pages/errorpage', {
+				message: 'Unprecedented circumstances occured, please try again'
+			});
+			return;
+		} else {
+			let revertBasketOrder = await Utils.completeBasketOrder(orderId, true);
+			let revertFlowerOrder = await Utils.completeFlowerOrder(orderId, true);
+			console.log(revertBasketOrder + ' ' + revertFlowerOrder);
+			return res.send(req.session.username);
+		}
 	},
 
 	viewCombos: (req, res) => {
@@ -115,7 +144,11 @@ module.exports = {
 		res.view('pages/customizecombo');
 	},
 
-	checkQuantity: async (flowerName, basketName) => {
+	placeBasketOrder: async (basketName) => {
 		return true;
 	}
+};
+
+const checkQuantity = (flowerName, basketName) => {
+	return true;
 };

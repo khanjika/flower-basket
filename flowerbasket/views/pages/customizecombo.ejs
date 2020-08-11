@@ -1,14 +1,18 @@
 <div class="container">
-  <form action="/customizeOrder" method="POST">
+  <form action="/placeOrder" method="POST">
     <label for="flowerName">Flower: </label>
     <select id="flower" name="flower">
-      <option value="a">a</option>
+      <% flowers.forEach(function(i){ %>
+      <option value="<%= i.flowerId %>"><%= i.flowerName %></option>
+      <% }) %>
     </select>
-    <label for="flowerQuantity">Flower Quantity: </label>
-    <input type="number" id="flowerQuantity" name="flowerQuantity" />
+    <!-- <label for="flowerQuantity">Flower Quantity: </label>
+    <input type="number" id="flowerQuantity" name="flowerQuantity" /> -->
     <label for="basketname">Basket: </label>
     <select id="basket" name="basket">
-      <option value="a">a</option>
+      <% baskets.forEach(function(i){ %>
+      <option value="<%= i.basketId %>"><%= i.basketName %></option>
+      <% }) %>
     </select>
     <button type="submit" id="submit" name="submit">Place Order</button>
   </form>

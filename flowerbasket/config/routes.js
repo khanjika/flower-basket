@@ -27,6 +27,7 @@ module.exports.routes = {
 
   "post /signup": "FlowerBasketController.signUp",
   "get /placeOrder": "FlowerBasketController.placeOrder",
+  "get /customizeYourCombo": "FlowerBasketController.customizeCombo",
 
   /***************************************************************************
    *                                                                          *

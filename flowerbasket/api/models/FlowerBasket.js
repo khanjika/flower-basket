@@ -8,41 +8,46 @@
 module.exports = {
   attributes: {
     id: {
-      columnName: 'flowerBaseketId',
-      type: 'Number',
+      columnName: "flowerBaseketId",
+      type: "Number",
       required: true,
-      columnType: 'int'
+      columnType: "int",
     },
     flowerName: {
-      columnName: 'flowerName',
-      type: 'string',
-      required: true
+      columnName: "flowerName",
+      type: "string",
+      required: true,
     },
     basketName: {
-      columnName: 'basketName',
-      type: 'string',
-      required: true
+      columnName: "basketName",
+      type: "string",
+      required: true,
     },
     details: {
-      columnName: 'details',
-      type: 'string',
-      columnType: 'varchar'
+      columnName: "details",
+      type: "string",
+      columnType: "varchar",
     },
     price: {
-      columnName: 'price',
-      type: 'Number',
-      columnType: 'int'
+      columnName: "price",
+      type: "Number",
+      columnType: "int",
     },
     flowerImageUrl: {
-      columnName: 'flowerImageUrl',
-      type: 'string',
-      columnType: 'varchar'
+      columnName: "flowerImageUrl",
+      type: "string",
+      columnType: "varchar",
     },
     basketImageUrl: {
-      columnName: 'basketImageUrl',
-      type: 'string',
-      columnType: 'varchar'
-    }
+      columnName: "basketImageUrl",
+      type: "string",
+      columnType: "varchar",
+    },
+    flowerQuantity: {
+      columnName: "flowerQuantity",
+      type: "Number",
+      columnType: "int",
+    },
   },
-  tableName: 'flowerBasket'
+  tableName: "flowerBasket",
 };

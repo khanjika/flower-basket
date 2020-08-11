@@ -1,19 +1,26 @@
-<div class="container">
+<div class="container" style="margin-top: 10%;">
   <form action="/placeOrder" method="POST">
-    <label for="flowerName">Flower: </label>
-    <select id="flower" name="flower">
-      <% flowers.forEach(function(i){ %>
-      <option value="<%= i.flowerId %>"><%= i.flowerName %></option>
-      <% }) %>
-    </select>
+    <div class="form-group">
+      <label for="flowerName" style="font-weight: bold;">Flower </label>
+      <select class="form-control" id="flower" name="flower">
+        <option selected>Select Flower</option>
+        <% flowers.forEach(function(i){ %>
+        <option value="<%= i.flowerId %>"><%= i.flowerName %></option>
+        <% }) %>
+      </select>
+    </div>
     <!-- <label for="flowerQuantity">Flower Quantity: </label>
     <input type="number" id="flowerQuantity" name="flowerQuantity" /> -->
-    <label for="basketname">Basket: </label>
-    <select id="basket" name="basket">
-      <% baskets.forEach(function(i){ %>
-      <option value="<%= i.basketId %>"><%= i.basketName %></option>
-      <% }) %>
-    </select>
-    <button type="submit" id="submit" name="submit">Place Order</button>
+    <div class="form-group">
+      <label for="basketname" style="font-weight: bold;">Basket </label>
+      <select class="form-control" id="basket" name="basket">
+        <option selected>Select Basket</option>
+        <% baskets.forEach(function(i){ %>
+        <option value="<%= i.basketId %>"><%= i.basketName %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color: black;">Place
+      Order</button>
   </form>
 </div>

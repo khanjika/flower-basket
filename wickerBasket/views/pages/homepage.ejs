@@ -30,7 +30,7 @@
           <!-- <td><%= basket.imageUrl %></td> -->
           <td><img src= <%= basket.imageUrl %> height = 150 width = 170></td>
           <td><%= basket.quantityAvailable %></td>
-          <td><%= basket.price %></td>
+          <td>$<%= basket.price %></td>
           <td>
             <% var deleteUrl = '/delete?basketId=' + basket.basketId %>
             <% var updateUrl = '/update?basketId=' + basket.basketId %>

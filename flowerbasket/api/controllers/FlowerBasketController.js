@@ -122,8 +122,6 @@ module.exports = {
               console.log(error);
             } else {
               let baskets = JSON.parse(body);
-              console.log(baskets);
-              console.log(flowers.body);
               return res.view("pages/customizecombo", {
                 flowers: flowers.body,
                 baskets: baskets,

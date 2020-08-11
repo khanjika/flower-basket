@@ -8,7 +8,7 @@
 module.exports = {
   attributes: {
     id: {
-      columnName: "flowerBaseketId",
+      columnName: "flowerBasketId",
       type: "Number",
       required: true,
       columnType: "int",

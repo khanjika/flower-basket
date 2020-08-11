@@ -28,6 +28,8 @@ module.exports.routes = {
   "post /update": "BasketController.updateBasketDetails",
   "get /checkAvailablityOfBasket": "BasketController.checkAvailablityOfBasket",
 
+  "get /getAllBasketList": "BasketController.getAllBasketList",
+
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *

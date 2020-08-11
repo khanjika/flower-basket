@@ -26,6 +26,7 @@ module.exports.routes = {
   "post /create": "FlowerController.addFlowerDetails",
 
   "get /checkAvailablityOfFlower": "FlowerController.checkAvailablityOfFlower",
+  "get /getAllFlowerList": "FlowerController.getAllFlowerList",
 
   "get /create": { view: "pages/createNew" },
 

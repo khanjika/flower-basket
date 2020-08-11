@@ -27,7 +27,7 @@
           <td style="text-align: center; padding-top: 5%;">
             <span style="font-size: x-large;"><%= combo[0].flowerName %></span>
           </td>
-          <td>
+          <td style="text-align: center">
             <img alt="Flower image" src=" <%= combo[0].flowerImageUrl %>" style="width: 100px; height: 100px;"></img>
           </td>
         </tr>
@@ -35,23 +35,15 @@
           <td style="text-align: center; padding-top: 5%;">
             <span style="font-size: x-large;"><%= combo[0].basketName %></span>
           </td>
-          <td>
-            <img alt="Basket image" src=" <%= combo[0].basketImageUrl %>" style="width: 100px; height: 100px;"></img>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span style="font-size: x-large;">Quantity of Flowers </span>
-          </td>
-          <td style="padding-left: 5%;">
-            <span style="font-size: x-large;"><%= combo[0].price %></span>
+          <td style="text-align: center">
+            <img alt=" Basket image" src=" <%= combo[0].basketImageUrl %>" style="width: 100px; height: 100px;"></img>
           </td>
         </tr>
         <tr>
           <td style="text-align: center;">
             <span style="font-size: x-large;">Price </span>
           </td>
-          <td style="padding-left: 5%;">
+          <td style="padding-left: 5%; text-align: center">
             <span style="font-size: x-large;"><%= combo[0].price %></span>
           </td>
         </tr>
@@ -60,7 +52,7 @@
   </div>
 </div>
 <div class="button_place" style="text-align: center;">
-  <a href="/placeOrder" type="button" class="btn btn-dark" role="btn btn-info"
-    style="background-color: black; color: white;">View
+  <a href="/placeOrder?flowerName=<%=combo[0].flowerName%>&basketName=<%=combo[0].basketName%>" type="button"
+    class="btn btn-dark" role="btn btn-info" style="background-color: black; color: white;">View
     Details</a>
 </div>

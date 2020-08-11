@@ -8,7 +8,7 @@
 module.exports = {
   attributes: {
     id: {
-      columnName: "flowerBaseketId",
+      columnName: "flowerBasketId",
       type: "Number",
       required: true,
       columnType: "int",
@@ -23,8 +23,8 @@ module.exports = {
       type: "string",
       required: true,
     },
-    details: {
-      columnName: "details",
+    comboName: {
+      columnName: "comboName",
       type: "string",
       columnType: "varchar",
     },

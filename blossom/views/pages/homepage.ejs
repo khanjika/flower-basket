@@ -40,6 +40,9 @@
           <div class="briedDesc">
             <%= flower.details %>
           </div>
+          <div class="briedDesc">
+            <span>Quantity Available : <%= flower.quantityAvailable %> </span>
+          </div>
           <div class="operations mt-5">
             <% var deleteUrl = '/delete?flowerId=' + flower.flowerId %> <% var
             updateUrl = '/update?flowerId=' + flower.flowerId %>

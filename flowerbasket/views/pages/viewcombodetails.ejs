@@ -1,16 +1,66 @@
+<nav class="navbar navbar-dark navbar-expand-md darkNav pt-2 pb-2 pl-5 pr-5">
+  <a class="navbar-brand" href="/">FlowerBasket</a>
+  <form class="form-inline ml-auto">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/customizeYourCombo">Customize Flower Basket</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/signup">Signup</a>
+    </li>
+  </ul>
+</nav>
 <div class="container">
-  <h2>Flower Basket Combo Details</h2>
-  <h3>Combo Id:</h3>
-  <h4><%= combo[0].id %></h4>
-  <h3>Flower Name:</h3>
-  <h4><%= combo[0].flowerName %></h4>
-  <img alt="Flower image" src=" <%= combo[0].flowerImageUrl %>" style="width: 150px; height: 150px;"></img>
-  <h3>Basket Name:</h3>
-  <h4><%= combo[0].basketName %></h4>
-  <img alt="Basket image" src=" <%= combo[0].basketImageUrl %>" style="width: 150px; height: 150px;"></img>
-  <h3>Details:</h3>
-  <h4><%= combo[0].details %></h4>
-  <h3>Price:</h3>
-  <h4><%= combo[0].price %></h4>
-  <a href="/placeOrder">Place Order</a>
+  <div style="margin-top: 80px; text-align: center;">
+    <h2> <%= combo[0].details%> Combo</h2>
+  </div>
+  <div class="row justify-content-center">
+    <table class="table table-striped" style="width: 70%;">
+      <tbody>
+        <tr>
+          <td style="text-align: center; padding-top: 5%;">
+            <span style="font-size: x-large;"><%= combo[0].flowerName %></span>
+          </td>
+          <td>
+            <img alt="Flower image" src=" <%= combo[0].flowerImageUrl %>" style="width: 100px; height: 100px;"></img>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center; padding-top: 5%;">
+            <span style="font-size: x-large;"><%= combo[0].basketName %></span>
+          </td>
+          <td>
+            <img alt="Basket image" src=" <%= combo[0].basketImageUrl %>" style="width: 100px; height: 100px;"></img>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+            <span style="font-size: x-large;">Quantity of Flowers </span>
+          </td>
+          <td style="padding-left: 5%;">
+            <span style="font-size: x-large;"><%= combo[0].price %></span>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+            <span style="font-size: x-large;">Price </span>
+          </td>
+          <td style="padding-left: 5%;">
+            <span style="font-size: x-large;"><%= combo[0].price %></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="button_place" style="text-align: center;">
+  <a href="/placeOrder" type="button" class="btn btn-dark" role="btn btn-info"
+    style="background-color: black; color: white;">View
+    Details</a>
 </div>

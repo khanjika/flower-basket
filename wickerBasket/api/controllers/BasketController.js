@@ -51,7 +51,37 @@ module.exports = {
 		);
 	},
 
-	addNewBasket: (req, res) => {},
+	addNewBasket: (req, res) => {
+		return res.view('pages/addNewBasket');
+	},
+
+	addNewBasketToDB: (req, res) => {
+		let bodyData = {
+			basketName: req.body.basketName,
+			imageUrl: req.body.imageUrl,
+			details: req.body.details,
+			price: req.body.price,
+			quantityAvailable: req.body.quantityAvailable
+		};
+
+		console.log('Received request to add a new Basket');
+		request(
+			{
+				url: 'https://ke9n5fdnj7.execute-api.us-east-1.amazonaws.com/prod/addnewbaskettodb',
+				method: 'POST',
+				body: JSON.stringify(bodyData)
+			},
+			async function(error, response, body) {
+				if (error) {
+					console.log(error);
+					return res.error('Failed to delete basket. Try again!');
+				}
+				console.log(response.body);
+
+				return res.redirect('/');
+			}
+		);
+	},
 
 	updateBasketView: (req, res) => {
 		console.log('Received request to updateBasketView');
@@ -70,46 +100,11 @@ module.exports = {
 				}
 				console.log(response.body);
 
-				// let response = {
-				// 	statusCode: 200,
-				// 	message: 'Successfull',
-				// 	result: findResult
-				// };
-
 				let basket = JSON.parse(response.body);
 				console.log(basket);
 				return res.view('pages/updatepage', { basket: basket.result[0] });
 			}
 		);
-
-		// dbPool.getConnection(function(err, basketDb) {
-		// 	if (err) {
-		// 		console.log('Failed to connect to mysql ' + err);
-		// 		//context.succeed({ statusCode: 500, message: 'Failed to connect to database' });
-		// 		res.send(err);
-		// 		return;
-		// 	}
-		// 	basketDb.query('select * from baskets where basketId = ?', [basketId], (findErr, findResult) => {
-		// 		basketDb.release();
-		// 		if (findErr) {
-		// 			console.log('Error in fetching database ' + findErr);
-		// 			//context.succeed({ statusCode: 500, message: findErr });
-		// 			res.send(findErr);
-		// 			return;
-		// 		}
-
-		// 		console.log(findResult);
-		// 		let response = {
-		// 			statusCode: 200,
-		// 			message: 'Successfull',
-		// 			result: findResult
-		// 		};
-		// 		let basket = findResult[0];
-		// 		console.log("Basket name " + basket.basketName);
-		// 		return res.view('pages/updatepage', { basket: findResult[0] });
-		// 		//context.succeed(response);
-		// 	});
-		// });
 	},
 
 	updateBasketDetails: (req, res) => {
@@ -136,65 +131,6 @@ module.exports = {
 				res.redirect('/');
 			}
 		);
-
-		// console.log(req.body.basketName);
-		// let basketName = req.body.basketName;
-		// let basketId = req.body.basketId;
-		// let details = req.body.details;
-		// let price = req.body.price;
-		// let quantityAvailable = req.body.quantityAvailable;
-
-		// dbPool.getConnection(function (err, basketDb) {
-		// 	if (err) {
-		// 	  console.log("Failed to connect to mysql " + err);
-		// 	  //context.succeed(err);
-		// 	  return;
-		// 	}
-		// 	//console.log(event);
-		// 	basketDb.query(
-		// 	  "select * from baskets where basketId = ?",
-		// 	  [basketId],
-		// 	  (err, result, fields) => {
-		// 		if (err) {
-		// 		  console.log(err);
-		// 		  let response = {
-		// 			statusCode: 500,
-		// 			message: "Error in fetching data from database!!",
-		// 		  };
-		// 		  //context.succeed(response);
-		// 		}
-		// 		if (result.length > 0) {
-		// 		  basketDb.query(
-		// 			"Update baskets set details=?,price=?,quantityAvailable=? where basketId = ?",
-		// 			[details, price, quantityAvailable, basketId],
-		// 			(err, result, fields) => {
-		// 			  if (err) {
-		// 				console.log(err);
-		// 				let response = {
-		// 				  statusCode: 500,
-		// 				  message: "Error in updating data!!",
-		// 				};
-		// 				//context.succeed(response);
-		// 			  }
-		// 			  let response = {
-		// 				statusCode: 200,
-		// 				message: "Successfully updated job details !!",
-		// 			  };
-		// 			  //context.succeed(response);
-		// 			}
-		// 		  );
-		// 		} else {
-		// 		  let response = {
-		// 			statusCode: 203,
-		// 			message: "JobName and partId does not exist !!",
-		// 		  };
-		// 		  //context.succeed(response);
-		// 		}
-		// 	  }
-		// 	);
-		// 	res.redirect("/");
-
-		//   });
 	},
 
 	deleteBasketDetails: (req, res) => {

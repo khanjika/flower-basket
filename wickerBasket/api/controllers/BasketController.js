@@ -48,11 +48,9 @@ module.exports = {
 				let basketList = JSON.parse(response.body);
 
 				if (basketList.statusCode != 200) {
-					return res.view('pages/errorPage', {
-						message: result.message
-					});
+					return res.status(200).json({ result: [] });
 				}
-				if (result.statusCode == 200) {
+				if (basketList.statusCode == 200) {
 					let flag = true;
 					return res.status(200).json(basketList.result);
 				}
@@ -92,8 +90,8 @@ module.exports = {
 					});
 				}
 				if (result.statusCode == 200) {
-					return res.redirect("/");
-				}		
+					return res.redirect('/');
+				}
 			}
 		);
 	},
@@ -156,7 +154,7 @@ module.exports = {
 					});
 				}
 				if (result.statusCode == 200) {
-					return res.redirect("/");
+					return res.redirect('/');
 				}
 			}
 		);

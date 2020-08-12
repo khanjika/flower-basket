@@ -1,5 +1,5 @@
-const mysql = require("mysql");
 
+const mysql = require("mysql");
 const dbPool = mysql.createPool({
   connectionLimit: 6,
   host: "cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com",
@@ -8,7 +8,6 @@ const dbPool = mysql.createPool({
   database: "blossom",
   port: "3306",
 });
-
 exports.handler = (event, context) => {
   console.log("Search request");
   dbPool.getConnection(function (err, flowerDb) {

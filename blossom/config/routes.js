@@ -26,6 +26,7 @@ module.exports.routes = {
   "post /create": "FlowerController.addFlowerDetails",
 
   "get /create": { view: "pages/createNew" },
+  "get /pastOrders": "FlowerController.getPastOrderDetails",
 
   /***************************************************************************
    *                                                                          *

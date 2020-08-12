@@ -21,7 +21,7 @@ module.exports = {
       },
       function (error, response, body) {
         if (error) {
-          res.send(500, "Error in getting job details!!");
+          res.send(500, "Error in getting details!!");
         }
         let result = JSON.parse(response.body);
         //let status = result.statusCode;
@@ -100,7 +100,7 @@ module.exports = {
       },
       function (error, response, body) {
         if (error) {
-          res.send(500, "Error in getting job details!!");
+          res.send(500, "Error in getting details!!");
         }
         let responseBody = JSON.parse(response.body);
         //let status = result.statusCode;
@@ -251,6 +251,31 @@ module.exports = {
     );
   },
 
+  getPastOrderDetails: (req, res) => {
+    request(
+      {
+        url:
+          "https://ecdiyu2d9h.execute-api.us-east-1.amazonaws.com/prod/pastorders",
+        method: "GET",
+      },
+      function (error, response, body) {
+        if (error) {
+          res.send(500, "Error in getting details!!");
+        }
+        let result = JSON.parse(response.body);
+        console.log(result);
+        if (result.statusCode != 200) {
+          return res.view("pages/errorPage", {
+            message: result.message,
+          });
+        }
+        if (result.statusCode == 200) {
+          console.log("success");
+          res.view("pages/pastOrders", { orders: result.body });
+        }
+      }
+    );
+  },
 
   saveOrderDetails: (req, res) => { },
 };

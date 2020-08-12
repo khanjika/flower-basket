@@ -9,7 +9,7 @@
  */
 
 module.exports.routes = {
-  /***************************************************************************
+	/***************************************************************************
    *                                                                          *
    * Make the view located at `views/homepage.ejs` your home page.            *
    *                                                                          *
@@ -18,19 +18,21 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  "/": "BasketController.getAllBasketListView",
-  "/getAllBasketList": "BasketController.getAllBasketList",
-  "/update": "BasketController.updateBasketView",
-  "/delete": "BasketController.deleteBasketDetails",
-  "/addNewBasket": "BasketController.addNewBasket",
-  "post /add": "BasketController.addNewBasketToDB",
+	'/': 'BasketController.getAllBasketListView',
+	'/getAllBasketList': 'BasketController.getAllBasketList',
+	'/update': 'BasketController.updateBasketView',
+	'/delete': 'BasketController.deleteBasketDetails',
+	'/addNewBasket': 'BasketController.addNewBasket',
+	'post /add': 'BasketController.addNewBasketToDB',
 
-  "post /update": "BasketController.updateBasketDetails",
-  "get /checkAvailablityOfBasket": "BasketController.checkAvailablityOfBasket",
+	'post /update': 'BasketController.updateBasketDetails',
+	'get /checkAvailablityOfBasket': 'BasketController.checkAvailablityOfBasket',
+	'get /placeBasketOrder': 'BasketController.placeBasketOrder',
+	'get /completeBasketOrder': 'BasketController.completeBasketOrder',
 
-  "get /getAllBasketList": "BasketController.getAllBasketList",
+	'get /getAllBasketList': 'BasketController.getAllBasketList'
 
-  /***************************************************************************
+	/***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
    * (See https://sailsjs.com/config/routes for examples.)                    *

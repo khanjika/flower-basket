@@ -4,11 +4,12 @@ const { checkAvailablityOfFlower } = require('../../../blossom/api/controllers/F
 
 const dbPool = mysql.createPool({
 	connectionLimit: 5,
-	host: 'cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com',
+	host: 'baskets.ccaqr39dxhsq.us-east-1.rds.amazonaws.com',
 	user: 'admin',
 	password: 'aws_data',
 	database: 'wickerBasket',
-	port: '3306'
+	port: '3306',
+	multipleStatements: true
 });
 
 module.exports = {
@@ -157,7 +158,52 @@ module.exports = {
 		);
 	},
 
-	saveOrderDetails: (req, res) => {},
+	placeBasketOrder: (req, res) => {
+		console.log('Placing fower order for basket: ' + req.param('basketName'));
+		let basketName = req.param('basketName');
+		let orderId = req.param('orderId');
+		request(
+			{
+				url:
+					'https://gymqgz9ywc.execute-api.us-east-1.amazonaws.com/prod/placebasketorder?basketName=' +
+					basketName +
+					'&orderId=' +
+					orderId,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured');
+					return res.json({ result: false });
+				}
+				return res.json(JSON.parse(response.body));
+			}
+		);
+	},
+
+	completeBasketOrder: (req, res) => {
+		console.log('Completing transaction for orderId ' + req.param('orderId'));
+		let orderId = req.param('orderId');
+		let commitTransaction = req.param('commitTransaction');
+		console.log(commitTransaction);
+		request(
+			{
+				url:
+					'https://b1c2j3jnq9.execute-api.us-east-1.amazonaws.com/prod/completebasketorder?orderId=' +
+					orderId +
+					'&commitTransaction=' +
+					commitTransaction,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured');
+					return res.json({ result: false });
+				}
+				return res.json(JSON.parse(response.body));
+			}
+		);
+	},
 
 	checkAvailablityOfBasket: (req, res) => {
 		console.log('Request received to check if basket available');

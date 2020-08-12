@@ -12,6 +12,7 @@ module.exports.checkQuantity = async function(flowerName, basketName) {
 					console.log('Error occured in checking quantity of flower');
 					resolve(false);
 				}
+				console.log(response);
 				let flowerResp = JSON.parse(response.body);
 				console.log('Flower response ' + flowerResp.result);
 				if (flowerResp.result == false) {

@@ -46,8 +46,16 @@ module.exports = {
 				console.log(response.body);
 
 				let basketList = JSON.parse(response.body);
-				let flag = true;
-				return res.status(200).json(basketList.result);
+
+				if (basketList.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: result.message
+					});
+				}
+				if (result.statusCode == 200) {
+					let flag = true;
+					return res.status(200).json(basketList.result);
+				}
 			}
 		);
 	},
@@ -77,9 +85,15 @@ module.exports = {
 					console.log(error);
 					return res.error('Failed to delete basket. Try again!');
 				}
-				console.log(response.body);
-
-				return res.redirect('/');
+				let result = JSON.parse(response.body);
+				if (result.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: result.message
+					});
+				}
+				if (result.statusCode == 200) {
+					return res.redirect("/");
+				}		
 			}
 		);
 	},
@@ -102,8 +116,14 @@ module.exports = {
 				console.log(response.body);
 
 				let basket = JSON.parse(response.body);
-				console.log(basket);
-				return res.view('pages/updatepage', { basket: basket.result[0] });
+				if (basket.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: result.message
+					});
+				}
+				if (basket.statusCode == 200) {
+					return res.view('pages/updatepage', { basket: basket.result[0] });
+				}
 			}
 		);
 	},
@@ -129,7 +149,15 @@ module.exports = {
 					return res.error('Failed to update basket details. Try again');
 				}
 				console.log(response.body);
-				res.redirect('/');
+				let result = JSON.parse(response.body);
+				if (result.statusCode != 200) {
+					return res.view('pages/errorPage', {
+						message: result.message
+					});
+				}
+				if (result.statusCode == 200) {
+					return res.redirect("/");
+				}
 			}
 		);
 	},

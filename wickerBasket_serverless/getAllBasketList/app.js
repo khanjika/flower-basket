@@ -2,7 +2,7 @@ const mysql = require('mysql');
 
 const dbPool = mysql.createPool({
 	connectionLimit: 5,
-	host: 'cloudproject.cgvh2dl8kyyq.us-east-1.rds.amazonaws.com',
+	host: 'baskets.ccaqr39dxhsq.us-east-1.rds.amazonaws.com',
 	user: 'admin',
 	password: 'aws_data',
 	database: 'wickerBasket',
@@ -21,7 +21,7 @@ exports.lambdaHandler = (event, context) => {
 			basketDb.query('select * from baskets', (findErr, findResult) => {
 				basketDb.release();
 				if (findErr) {
-					console.log('Error in fetching database ' + findErr);
+					console.log('Error in fetching values from database ' + findErr);
 					context.succeed({ statusCode: 500, message: findErr });
 					return;
 				}

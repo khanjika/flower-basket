@@ -1,11 +1,15 @@
 <div class="container mt-5">
   <body>
     <div style="position: relative;">
-      <h1 >Welcome to WickerBasket</h1>
-      <div style="position: absolute; right: 0; top: 0;">
+      
+      <h1 style = "text-align: center; font-weight: bold;">WickerBasket</h1>
+      <h6 style = "text-align: center; font-weight: bold; font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">a basket for all your needs</h6>
+    </div>
+      <br></br>
+      <div style="position: relative; right: -950px;">
           <a href="/addNewBasket" class="btn btn-success m-1" >Add a New Basket</a>
       </div>
-  </div>
+  
     <br />
     <table class="table">
       <thread>
@@ -26,7 +30,7 @@
           <!-- <td><%= basket.imageUrl %></td> -->
           <td><img src= <%= basket.imageUrl %> height = 150 width = 170></td>
           <td><%= basket.quantityAvailable %></td>
-          <td><%= basket.price %></td>
+          <td>$<%= basket.price %></td>
           <td>
             <% var deleteUrl = '/delete?basketId=' + basket.basketId %>
             <% var updateUrl = '/update?basketId=' + basket.basketId %>

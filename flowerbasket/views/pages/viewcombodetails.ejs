@@ -51,7 +51,15 @@
     </table>
   </div>
 </div>
-<div class="button_place" style="text-align: center;">
+<% var authencticated = sails.authencticated %>
+<% if(authencticated){%>
+  <div class="button_place" style="text-align: center;">
   <a href="/placeOrder?flowerName=<%=combo[0].flowerName%>&basketName=<%=combo[0].basketName%>" type="button"
     class="btn btn-dark" role="btn btn-info" style="background-color: black; color: white;">Place Order</a>
 </div>
+<%}else{%>
+  <div class="button_place" style="text-align: center;">
+    <a href="/login" type="button"
+      class="btn btn-dark" role="btn btn-info" style="background-color: black; color: white;">Please Login to Place Order</a>
+  </div>
+  <%}%>

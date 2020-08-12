@@ -43,11 +43,12 @@ module.exports = {
       }
       console.log(data);
       console.log(data.user);
-      return res.send("Successful");
+      return res.redirect("/login");
     });
   },
 
   login: (req, res) => {
+    sails.authenticated = false;
     const loginDetails = {
       Username: req.body.username,
       Password: req.body.password,
@@ -64,13 +65,22 @@ module.exports = {
       onSuccess: (data) => {
         console.log(data.accessToken);
         req.session.username = req.body.username;
-        res.send(data);
+        sails.authenticated = true;
+        res.redirect("/");
       },
       onFailure: (err) => {
         console.log(err);
-        res.send(err);
+        res.view("/pages/errorpage", {
+          message: "Login failed please try again",
+        });
       },
     });
+  },
+
+  logout: (req, res) => {
+    sails.authenticated = false;
+    req.session.username = "";
+    return res.redirect("/");
   },
 
   placeOrder: async (req, res) => {

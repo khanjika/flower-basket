@@ -190,23 +190,41 @@ module.exports = {
 		console.log('Placing fower order for basket: ' + req.param('basketName'));
 		let basketName = req.param('basketName');
 		let orderId = req.param('orderId');
-		request(
-			{
-				url:
-					'https://gymqgz9ywc.execute-api.us-east-1.amazonaws.com/prod/placebasketorder?basketName=' +
-					basketName +
-					'&orderId=' +
-					orderId,
-				method: 'GET'
-			},
-			function(error, response, body) {
-				if (error) {
-					console.log('Error occured');
+		dbPool.getConnection(function(err, basketDb) {
+			if (err) {
+				console.log('Failed to connect to mysql ' + err);
+				context.succeed({
+					statusCode: 500,
+					message: 'Failed to connect to database'
+				});
+				return res.json({ result: false });
+			}
+			var datetime = new Date().toISOString();
+
+			let dateVal = datetime.slice(0, 10);
+
+			let xa = `XA start "${orderId}";`;
+			let updateQuantity = `update baskets set quantityAvailable = quantityAvailable - 1 where basketName = "${basketName}"; `;
+			let saveOrder = `insert into orders (basketName, date) values("${basketName}", "${dateVal}");`;
+			let endXa = `XA end "${orderId}";`;
+			let sqlQueries = xa + updateQuantity + saveOrder + endXa;
+			console.log(sqlQueries);
+			basketDb.query(sqlQueries, (findErr, transactionResult) => {
+				basketDb.release();
+				if (findErr) {
+					console.log('Error in fetching database ' + findErr);
 					return res.json({ result: false });
 				}
-				return res.json(JSON.parse(response.body));
-			}
-		);
+
+				console.log(transactionResult);
+				let response = {
+					statusCode: 200,
+					message: 'Successfull',
+					body: transactionResult
+				};
+				return res.json({ result: true });
+			});
+		});
 	},
 
 	completeBasketOrder: (req, res) => {
@@ -214,23 +232,38 @@ module.exports = {
 		let orderId = req.param('orderId');
 		let commitTransaction = req.param('commitTransaction');
 		console.log(commitTransaction);
-		request(
-			{
-				url:
-					'https://b1c2j3jnq9.execute-api.us-east-1.amazonaws.com/prod/completebasketorder?orderId=' +
-					orderId +
-					'&commitTransaction=' +
-					commitTransaction,
-				method: 'GET'
-			},
-			function(error, response, body) {
-				if (error) {
-					console.log('Error occured');
-					return res.json({ result: false });
-				}
-				return res.json(JSON.parse(response.body));
+		let xaPrepare = `XA prepare "${orderId}";`;
+		let xaQuery = `XA rollback "${orderId}";`;
+		if (commitTransaction == 'true') {
+			xaQuery = `XA commit "${orderId}";`;
+		}
+		let sqlQuery = xaPrepare + xaQuery;
+		console.log(sqlQuery);
+		dbPool.getConnection(function(err, flowerDb) {
+			if (err) {
+				console.log('Failed to connect to mysql ' + err);
+				return res.json({
+					statusCode: 500,
+					message: 'Failed to connect to database'
+				});
 			}
-		);
+
+			flowerDb.query(sqlQuery, (findErr, commitTransactionRes) => {
+				flowerDb.release();
+				if (findErr) {
+					console.log('Error in fetching database ' + findErr);
+					return res.json({ statusCode: 500, message: findErr });
+				}
+
+				console.log(commitTransactionRes);
+				let response = {
+					statusCode: 200,
+					message: 'Successfull',
+					body: commitTransactionRes
+				};
+				return res.json(response);
+			});
+		});
 	},
 
 	checkAvailablityOfBasket: (req, res) => {

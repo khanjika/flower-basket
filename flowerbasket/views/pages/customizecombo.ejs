@@ -9,8 +9,6 @@
         <% }) %>
       </select>
     </div>
-    <!-- <label for="flowerQuantity">Flower Quantity: </label>
-    <input type="number" id="flowerQuantity" name="flowerQuantity" /> -->
     <div class="form-group">
       <label for="basketname" style="font-weight: bold;">Basket </label>
       <select class="form-control" id="basket" name="basketName">
@@ -20,7 +18,27 @@
         <% }) %>
       </select>
     </div>
-    <button type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color: black;">Place
-      Order</button>
+    <% var authenticated = sails.authenticated %> <% if(authenticated){%>
+    <button
+      type="submit"
+      id="submit"
+      name="submit"
+      class="btn btn-primary"
+      style="background-color: black;"
+    >
+      Place Order
+    </button>
+    <%}else{%>
+    <div class="button_place">
+      <a
+        href="/login"
+        type="button"
+        class="btn btn-dark"
+        role="btn btn-info"
+        style="background-color: black; color: white;"
+        >Please Login to Place Order</a
+      >
+    </div>
+    <%}%>
   </form>
 </div>

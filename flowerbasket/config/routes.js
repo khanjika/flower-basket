@@ -9,7 +9,7 @@
  */
 
 module.exports.routes = {
-	/***************************************************************************
+  /***************************************************************************
    *                                                                          *
    * Make the view located at `views/homepage.ejs` your home page.            *
    *                                                                          *
@@ -18,20 +18,21 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-	'get /': 'FlowerBasketController.viewCombos',
-	'GET /combo/detail': 'FlowerBasketController.viewComboDetails',
-	'get /login': { view: 'pages/loginpage' },
-	'GET /showorderhistory': 'FlowerBasketController.showOrderHistory',
+  "get /": "FlowerBasketController.viewCombos",
+  "GET /combo/detail": "FlowerBasketController.viewComboDetails",
+  "get /login": { view: "pages/loginpage" },
+  "GET /showorderhistory": "FlowerBasketController.showOrderHistory",
 
-	'post /login': 'FlowerBasketController.login',
-	'get /signup': 'FlowerBasketController.signUpForm',
+  "post /login": "FlowerBasketController.login",
+  "get /signup": "FlowerBasketController.signUpForm",
 
-	'post /signup': 'FlowerBasketController.signUp',
-	'get /placeOrder': 'FlowerBasketController.placeOrder',
-	'post /placeOrder': 'FlowerBasketController.placeOrder',
-	'get /customizeYourCombo': 'FlowerBasketController.customizeCombo'
+  "post /signup": "FlowerBasketController.signUp",
+  "get /placeOrder": "FlowerBasketController.placeOrder",
+  "post /placeOrder": "FlowerBasketController.placeOrder",
+  "get /customizeYourCombo": "FlowerBasketController.customizeCombo",
+  "get /logout": "FlowerBasketController.logout",
 
-	/***************************************************************************
+  /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
    * (See https://sailsjs.com/config/routes for examples.)                    *

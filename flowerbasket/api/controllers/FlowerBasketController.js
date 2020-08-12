@@ -71,6 +71,8 @@ module.exports = {
     });
   },
 
+  logout: (req, res) => {},
+
   placeOrder: (req, res) => {
     let username = req.session.username;
 

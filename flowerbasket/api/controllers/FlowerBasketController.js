@@ -105,8 +105,16 @@ module.exports = {
 		}
 	},
 
+	customizePlaceOrder: (req, res) => {
+		let username = req.session.username;
+
+		let flowerName = req.param('flowerName');
+		let basketName = req.param('basketName');
+		let checkQuantity = checkQuantity(flowerName, basketName);
+		return res.send(req.session.username);
+	},
+
 	viewCombos: (req, res) => {
-		console.log('here you go....');
 		FlowerBasket.find({}).exec(function(err, result) {
 			if (err) {
 				res.send(500, { error: 'Error in Database' });
@@ -114,7 +122,6 @@ module.exports = {
 			if (result == '') {
 				res.send('No data present');
 			}
-			console.log(result);
 			res.view('pages/homepage', { combos: result });
 		});
 	},
@@ -128,27 +135,43 @@ module.exports = {
 			if (result == '') {
 				res.send('No data present');
 			}
-			console.log(result);
 			res.view('pages/viewcombodetails', { combo: result });
 		});
 	},
 
+	showOrderHistory: (req, res) => {
+		let username = 'admin';
+		OrderHistory.find({ username: username }).exec(function(err, result) {
+			if (err) {
+				res.send(500, { error: 'Error in Database' });
+			}
+			if (result == '') {
+				res.send('No data present');
+			} else {
+				console.log(result);
+				res.view('pages/showorderhistory', { orderhistory: result });
+			}
+		});
+	},
+
 	customizeCombo: (req, res) => {
-		request.get({ url: '' }, function(error, response, body) {
+		request.get({ url: 'http://localhost:1338/getAllFlowerList' }, function(error, response, body) {
 			if (error) {
 				console.log(error);
 			} else {
-				console.log(response.body);
+				let flowers = JSON.parse(body);
+				request.get({ url: 'http://localhost:1339/getAllBasketList' }, function(error, response, body) {
+					if (error) {
+						console.log(error);
+					} else {
+						let baskets = JSON.parse(body);
+						return res.view('pages/customizecombo', {
+							flowers: flowers.body,
+							baskets: baskets
+						});
+					}
+				});
 			}
 		});
-		res.view('pages/customizecombo');
-	},
-
-	placeBasketOrder: async (basketName) => {
-		return true;
 	}
-};
-
-const checkQuantity = (flowerName, basketName) => {
-	return true;
 };

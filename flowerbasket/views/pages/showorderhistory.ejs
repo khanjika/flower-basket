@@ -2,36 +2,42 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Combo Id</th>
+        <th>Order Id</th>
+        <th>Flower Basket Id</th>
         <th>Flower Name</th>
         <th>Basket Name</th>
         <th>Price</th>
-        <th></th>
+        <th>Order Date</th>
+        <th>User Name</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <% combos.forEach(function(i){ %>
+      <% orderhistory.forEach(function(i){ %>
       <tr>
         <td>
           <%= i.id %>
         </td>
         <td>
+          <%= i.comboId %>
+        </td>
+        <td>
           <%= i.flowerName %>
         </td>
         <td>
-          <%= i.basketName %>
+          <%= i.BasketName %>
         </td>
         <td>
           <%= i.price %>
         </td>
         <td>
-          <a
-            href="/combo/detail?id=<%=i.id%>"
-            type="button"
-            class="btn btn-dark"
-            role="btn btn-info"
-            >View Details</a
-          >
+          <%= i.orderDate %>
+        </td>
+        <td>
+          <%= i.username %>
+        </td>
+        <td>
+          <%= i.status %>
         </td>
       </tr>
       <% }) %>

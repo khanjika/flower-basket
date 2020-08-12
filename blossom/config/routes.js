@@ -28,6 +28,7 @@ module.exports.routes = {
 	'get /checkAvailablityOfFlower': 'FlowerController.checkAvailablityOfFlower',
 	'get /placeFlowerOrder': 'FlowerController.placeFlowerOrder',
 	'get /completeFlowerOrder': 'FlowerController.completeFlowerOrder',
+	'get /getAllFlowerList': 'FlowerController.getAllFlowerList',
 
 	'get /create': { view: 'pages/createNew' }
 

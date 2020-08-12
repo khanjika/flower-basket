@@ -7,25 +7,24 @@ module.exports = {
       columnType: "int",
     },
     comboId: {
-      columnName: "flowerBaseketId",
+      columnName: "flowerBasketId",
       type: "Number",
-      required: true,
       columnType: "int",
     },
     flowerName: {
       columnName: "flowerName",
       type: "string",
-      required: true,
+      columnType: "varchar",
     },
     basketName: {
       columnName: "basketName",
       type: "string",
-      required: true,
+      columnType: "varchar",
     },
     orderDate: {
       columnName: "orderDate",
       type: "string",
-      columnType: "datetime",
+      columnType: "varchar",
     },
     price: {
       columnName: "price",
@@ -35,12 +34,12 @@ module.exports = {
     username: {
       columnName: "username",
       type: "string",
-      required: true,
+      columnType: "varchar",
     },
     status: {
       columnName: "status",
       type: "string",
-      required: true,
+      columnType: "varchar",
     },
   },
   tableName: "orderHistory",

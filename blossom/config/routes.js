@@ -9,29 +9,37 @@
  */
 
 module.exports.routes = {
+	/***************************************************************************
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` your home page.            *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` your home page.            *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+	'/': 'FlowerController.getAllFlowerListView',
+	'get /update': 'FlowerController.updateFlowerView',
+	'post /update': 'FlowerController.updateFlowerDetails',
+	'post /search': 'FlowerController.searchByName',
+	'get /delete': 'FlowerController.deleteFlowerDetails',
+	'post /create': 'FlowerController.addFlowerDetails',
 
-  '/': { view: 'pages/homepage' },
+	'get /checkAvailablityOfFlower': 'FlowerController.checkAvailablityOfFlower',
+	'get /placeFlowerOrder': 'FlowerController.placeFlowerOrder',
+	'get /completeFlowerOrder': 'FlowerController.completeFlowerOrder',
+	'get /getAllFlowerList': 'FlowerController.getAllFlowerList',
 
+	'get /create': { view: 'pages/createNew' }
 
-  /***************************************************************************
-  *                                                                          *
-  * More custom routes here...                                               *
-  * (See https://sailsjs.com/config/routes for examples.)                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the routes in this file, it   *
-  * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
-  * not match any of those, it is matched against static assets.             *
-  *                                                                          *
-  ***************************************************************************/
-
-
+	/***************************************************************************
+   *                                                                          *
+   * More custom routes here...                                               *
+   * (See https://sailsjs.com/config/routes for examples.)                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the routes in this file, it   *
+   * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
+   * not match any of those, it is matched against static assets.             *
+   *                                                                          *
+   ***************************************************************************/
 };

@@ -1,19 +1,40 @@
-
-<div class="homepage">
-  <nav class="navbar navbar-dark navbar-expand-md darkNav pt-2 pb-2 pl-4 pr-4">
-    <a class="navbar-brand" href="/">BuyBest</a>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <ul class="navbar-nav mr-auto">
-     
-      <li class="nav-item">
-        <a href="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a href="/signup">Signup</a>
-      </li>
-    </ul>
-  </nav>
+<div class="container mt-5 pt-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Combo Id</th>
+        <th>Flower Name</th>
+        <th>Basket Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% combos.forEach(function(i){ %>
+      <tr>
+        <td>
+          <%= i.id %>
+        </td>
+        <td>
+          <%= i.flowerName %>
+        </td>
+        <td>
+          <%= i.basketName %>
+        </td>
+        <td>
+          <%= i.price %>
+        </td>
+        <td>
+          <a
+            href="/combo/detail?id=<%=i.id%>"
+            type="button"
+            class="btn btn-dark"
+            role="btn btn-info"
+            >View Details</a
+          >
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>

@@ -15,9 +15,10 @@ module.exports = {
 		},
 		flowerName: { columnName: 'flowerName', type: 'string', required: true },
 		details: { columnName: 'details', type: 'string', columnType: 'varchar' },
-		quantityAvailable: { columnType: 'quantityAvailable', type: 'number', columnType: 'int' },
-		updatedAt: false,
-		createdAt: false
+		price: { columnName: 'price', type: 'number', columnType: 'int' },
+		imageUrl: { columnName: 'imageUrl', type: 'string', columnType: 'varchar' },
+		quantityAvailable: { columnName: 'quantityAvailable', type: 'number', columnType: 'int' },
+	
 	},
 	tableName: 'blossom'
 };

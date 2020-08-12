@@ -7,7 +7,8 @@ const dbPool = mysql.createPool({
 	user: 'admin',
 	password: 'aws_data',
 	database: 'blossom',
-	port: '3306'
+	port: '3306',
+	multipleStatements: true
 });
 
 module.exports = {
@@ -261,5 +262,50 @@ module.exports = {
 		);
 	},
 
-	saveOrderDetails: (req, res) => {}
+	placeFlowerOrder: (req, res) => {
+		console.log('Placing fower order for flower: ' + req.param('flowerName'));
+		let flowerName = req.param('flowerName');
+		let orderId = req.param('orderId');
+		request(
+			{
+				url:
+					'https://o4g3hzhyfl.execute-api.us-east-1.amazonaws.com/prod/placeflowerorder?flowerName=' +
+					flowerName +
+					'&orderId=' +
+					orderId,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured');
+					return res.json({ result: false });
+				}
+				return res.json(JSON.parse(response.body));
+			}
+		);
+	},
+
+	completeFlowerOrder: (req, res) => {
+		console.log('Completing transaction for orderId' + req.param('orderId'));
+		let orderId = req.param('orderId');
+		let commitTransaction = req.param('commitTransaction');
+		console.log(commitTransaction);
+		https: request(
+			{
+				url:
+					'https://byruo79ldj.execute-api.us-east-1.amazonaws.com/prod/completeflowerorder?orderId=' +
+					orderId +
+					'&commitTransaction=' +
+					commitTransaction,
+				method: 'GET'
+			},
+			function(error, response, body) {
+				if (error) {
+					console.log('Error occured');
+					return res.json({ result: false });
+				}
+				return res.json(JSON.parse(response.body));
+			}
+		);
+	}
 };

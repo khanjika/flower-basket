@@ -266,23 +266,37 @@ module.exports = {
 		console.log('Placing fower order for flower: ' + req.param('flowerName'));
 		let flowerName = req.param('flowerName');
 		let orderId = req.param('orderId');
-		request(
-			{
-				url:
-					'https://o4g3hzhyfl.execute-api.us-east-1.amazonaws.com/prod/placeflowerorder?flowerName=' +
-					flowerName +
-					'&orderId=' +
-					orderId,
-				method: 'GET'
-			},
-			function(error, response, body) {
-				if (error) {
-					console.log('Error occured');
+		dbPool.getConnection(function(err, flowerDb) {
+			if (err) {
+				console.log('Failed to connect to mysql ' + err);
+				return res.json({ result: false });
+			}
+			var datetime = new Date().toISOString();
+
+			let dateVal = datetime.slice(0, 10);
+
+			let xa = `XA start "${orderId}";`;
+			let updateQuantity = `update flowers set quantityAvailable = quantityAvailable - 1 where flowerName = "${flowerName}"; `;
+			let saveOrder = `insert into orders (flowerName, date) values("${flowerName}", "${dateVal}");`;
+			let endXa = `XA end "${orderId}";`;
+			let sqlQueries = xa + updateQuantity + saveOrder + endXa;
+			console.log(sqlQueries);
+			flowerDb.query(sqlQueries, (findErr, transactionResult) => {
+				flowerDb.release();
+				if (findErr) {
+					console.log('Error in fetching database ' + findErr);
 					return res.json({ result: false });
 				}
-				return res.json(JSON.parse(response.body));
-			}
-		);
+
+				console.log(transactionResult);
+				let response = {
+					statusCode: 200,
+					message: 'Successfull',
+					body: transactionResult
+				};
+				return res.json({ result: true });
+			});
+		});
 	},
 
 	completeFlowerOrder: (req, res) => {
@@ -290,22 +304,38 @@ module.exports = {
 		let orderId = req.param('orderId');
 		let commitTransaction = req.param('commitTransaction');
 		console.log(commitTransaction);
-		https: request(
-			{
-				url:
-					'https://byruo79ldj.execute-api.us-east-1.amazonaws.com/prod/completeflowerorder?orderId=' +
-					orderId +
-					'&commitTransaction=' +
-					commitTransaction,
-				method: 'GET'
-			},
-			function(error, response, body) {
-				if (error) {
-					console.log('Error occured');
-					return res.json({ result: false });
-				}
-				return res.json(JSON.parse(response.body));
+		let xaPrepare = `XA prepare "${orderId}";`;
+		let xaQuery = `XA rollback "${orderId}";`;
+		if (commitTransaction == 'true') {
+			xaQuery = `XA commit "${orderId}";`;
+		}
+		let sqlQuery = xaPrepare + xaQuery;
+		console.log(sqlQuery);
+		dbPool.getConnection(function(err, flowerDb) {
+			if (err) {
+				console.log('Failed to connect to mysql ' + err);
+				context.succeed({
+					statusCode: 500,
+					message: 'Failed to connect to database'
+				});
+				return res.send({ statusCode: 500, message: err });
 			}
-		);
+
+			flowerDb.query(sqlQuery, (findErr, commitTransactionRes) => {
+				flowerDb.release();
+				if (findErr) {
+					console.log('Error in fetching database ' + findErr);
+					return res.send({ statusCode: 500, message: findErr });
+				}
+
+				console.log(commitTransactionRes);
+				let response = {
+					statusCode: 200,
+					message: 'Successfull',
+					body: commitTransactionRes
+				};
+				return res.send(response);
+			});
+		});
 	}
 };

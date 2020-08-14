@@ -5,7 +5,9 @@
       <select class="form-control" id="flower" name="flowerName">
         <option selected>Select Flower</option>
         <% flowers.forEach(function(i){ %>
-        <option value="<%= i.flowerName %>"><%= i.flowerName %></option>
+        <option value="<%= i.flowerName %>"
+          ><%= i.flowerName %> ($<%= i.price %>)</option
+        >
         <% }) %>
       </select>
     </div>
@@ -14,7 +16,9 @@
       <select class="form-control" id="basket" name="basketName">
         <option selected>Select Basket</option>
         <% baskets.forEach(function(i){ %>
-        <option value="<%= i.basketName %>"><%= i.basketName %></option>
+        <option value="<%= i.basketName %>"
+          ><%= i.basketName %> ($<%= i.price %>)</option
+        >
         <% }) %>
       </select>
     </div>
